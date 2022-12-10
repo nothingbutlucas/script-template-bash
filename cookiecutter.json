@@ -1,7 +1,7 @@
 {
   "script_name": "script",
   "description": "description",
-  "date": "$(date +%Y-%m-%d)",
+  "run_as_root": "y/n",
   "author": "@nothingbutlucas",
   "version": "1.0.0",
   "license": "GNU General Public License v3.0"

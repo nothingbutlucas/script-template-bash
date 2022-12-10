@@ -4,7 +4,6 @@
 
 # Description: {{cookiecutter.description}}
 # Author: {{cookiecutter.author}}
-# Date: {{cookiecutter.date}}
 # Version: {{cookiecutter.version}}
 # License: {{cookiecutter.license}}
 
@@ -54,17 +53,21 @@ function start_script(){
 }
 
 function verify_root(){
-  # if [[ $(id -u) -ne 0 ]]; then
-  #   echo -e "${sign_wrong}This script must be run as root" 1>&2
-  #   exit_script
-  # else
-  #   echo -e "${sign_good}Running as root"
-  # fi
-  if [[ $(id -u) == 0 ]]; then
-    echo -e "${sign_wrong}This script must not be run as root" 1>&2
-    exit_script
+  root_or_not={{cookiecutter.run_as_root}}
+  if [[ $root_or_not == "y" ]]; then
+    if [[ $(id -u) -ne 0 ]]; then
+      echo -e "${sign_wrong}This script must be run as root" 1>&2
+      exit_script
+    else
+      echo -e "${sign_good}Running as root"
+    fi
   else
-    echo -e "${sign_good}Not running as root"
+    if [[ $(id -u) == 0 ]]; then
+      echo -e "${sign_wrong}This script must not be run as root" 1>&2
+      exit_script
+    else
+      echo -e "${sign_good}Not running as root"
+    fi
   fi
 }
 
