@@ -2,8 +2,7 @@
 
 ## How to use this template
 
-<code>
+```bash
 pip install cookiecutter
 cookiecutter https://github.com/nothingbutlucas/script-template-bash
-</code>
-
+```
