@@ -41,7 +41,7 @@ function ctrl_c() {
 }
 
 function exit_script() {
-	echo -e "${sign_good}Exiting script"
+	echo -e "${sign_good} Exiting script"
 	tput cnorm
 	exit 0
 }
@@ -49,31 +49,37 @@ function exit_script() {
 function start_script() {
 	tput civis
 	echo ""
-	echo -e "${sign_good}Starting script"
+	echo -e "${sign_good} Starting script"
 }
 
 function verify_root() {
 	root_or_not={{cookiecutter.run_as_root}}
 	if [[ $root_or_not == "y" ]]; then
 		if [[ $(id -u) -ne 0 ]]; then
-			echo -e "${sign_wrong}This script must be run as root" 1>&2
+			echo -e "${sign_wrong} This script must be run as root" 1>&2
 			exit_script
 		else
-			echo -e "${sign_good}Running as root"
+			echo -e "${sign_good} Running as root"
 		fi
 	else
 		if [[ $(id -u) == 0 ]]; then
-			echo -e "${sign_wrong}This script must not be run as root" 1>&2
+			echo -e "${sign_wrong} This script must not be run as root" 1>&2
 			exit_script
 		else
-			echo -e "${sign_good}Not running as root"
+			echo -e "${sign_good} Not running as root"
 		fi
 	fi
 }
 
 function help_panel() {
-	echo -e "Usage: ${good}$0 ${info}"
-	echo -e "\n\t${cmd}Example: $0${nc}"
+	echo -e "\n${sign_warn} Usage: ${good}$0\n"
+	echo -e "${sign_info} The script will {{cookiecutter.description}}"
+	echo -e "\n${sign_warn} Example: ${good}$0 ${info} -h ${nc}\n"
+	echo -e "\n${sign_warn} Options:\n"
+	echo -e "\t${info} -a ${nc}Set the option_a"
+	echo -e "\t${info} -b ${nc}Set the option_b"
+	echo -e "\t${info} -h ${nc}Show this help panel"
+	echo -e "\n"
 
 	exit_script
 }
@@ -132,7 +138,7 @@ while getopts ":a:b:hc" arg; do
 	c) case_c ;;
 	h) help_panel ;;
 	?)
-		echo -e "${wrong}[!]${nc}Invalid option: -$OPTARG\n"
+		echo -e "${sign_wrong} Invalid option: -$OPTARG\n"
 		help_panel
 		;;
 	esac
