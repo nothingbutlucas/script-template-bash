@@ -96,22 +96,26 @@ function wait_for_confirmation() {
 }
 
 function case_a() {
+	echo -e "${sign_info} The option_a is ${option_a}"
 	echo -e "${sign_doing} Doing something with case a..."
 	wait_for_confirmation
 }
 
 function case_b() {
+	echo -e "${sign_info} The option_b is ${option_b}"
 	echo -e "${sign_doing} Doing something with case b..."
 	wait_for_confirmation
 }
 
 function case_c() {
+	echo -e "${sign_info} The option_c is ${option_c}"
 	echo -e "${sign_doing} Doing something with case c..."
 	wait_for_confirmation
 	exit_script
 }
 
 function case_d() {
+	echo -e "${sign_info} The option_d is ${option_d}"
 	echo -e "${sign_doing} Doing something with case d..."
 	wait_for_confirmation
 }
@@ -119,9 +123,9 @@ function case_d() {
 # Main function
 
 function main() {
-	if [ $option_a == alpha ]; then
+	if [ $option_a != "alpha" ]; then
 		case_a
-	elif [ $option_b == beta ]; then
+	elif [ $option_b != "beta" ]; then
 		case_b
 	else
 		case_d
@@ -132,8 +136,8 @@ function main() {
 
 start_script
 
-option_a=a
-option_b=b
+option_a="alpha"
+option_b="beta"
 
 while getopts ":a:b:hc" arg; do
 	case $arg in

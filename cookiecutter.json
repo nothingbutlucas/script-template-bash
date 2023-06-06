@@ -1,7 +1,7 @@
 {
   "script_name": "script (sin .sh)",
   "description": "description",
-  "run_as_root": "y/n",
+  "run_as_root": "y/N",
   "author": "@nothingbutlucas",
   "version": "1.0.0",
   "license": "GNU General Public License v3.0"
