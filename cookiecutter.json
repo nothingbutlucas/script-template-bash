@@ -1,5 +1,5 @@
 {
-  "script_name": "script",
+  "script_name": "script (sin .sh)",
   "description": "description",
   "run_as_root": "y/n",
   "author": "@nothingbutlucas",

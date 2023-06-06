@@ -40,6 +40,10 @@ function ctrl_c() {
 	exit_script
 }
 
+function error() {
+	echo -e "${sign_wrong} ERROR: $*" >/dev/stderr
+}
+
 function exit_script() {
 	echo -e "${sign_good} Exiting script"
 	tput cnorm
@@ -56,14 +60,14 @@ function verify_root() {
 	root_or_not={{cookiecutter.run_as_root}}
 	if [[ $root_or_not == "y" ]]; then
 		if [[ $(id -u) -ne 0 ]]; then
-			echo -e "${sign_wrong} This script must be run as root" 1>&2
+			error "This script must be run as root"
 			exit_script
 		else
 			echo -e "${sign_good} Running as root"
 		fi
 	else
 		if [[ $(id -u) == 0 ]]; then
-			echo -e "${sign_wrong} This script must not be run as root" 1>&2
+			error "This script must not be run as root"
 			exit_script
 		else
 			echo -e "${sign_good} Not running as root"
@@ -138,7 +142,7 @@ while getopts ":a:b:hc" arg; do
 	c) case_c ;;
 	h) help_panel ;;
 	?)
-		echo -e "${sign_wrong} Invalid option: -$OPTARG\n"
+		error "Invalid option: -$OPTARG\n"
 		help_panel
 		;;
 	esac
